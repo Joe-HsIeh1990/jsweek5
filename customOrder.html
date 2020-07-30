@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/all.min.css">
+</head>
+
+<body>
+    <div class="container-md mx-auto" id="customOrder">
+        <validation-observer v-slot="{ invalid }">
+            <form @submit.prevent="sendForm">
+                <div class="form-group">
+                    <label for="name">收件人姓名</label>
+                    <validation-provider v-slot="{ errors , classes }" name="姓名" rules="required|name:2">
+                        <input type="text" class="form-control" :class="classes" id="name" placeholder="請輸入姓名,必填"
+                            v-model="user.name">
+                        <span class="text-danger">{{ errors[0] }}</span>
+                    </validation-provider>
+                </div>
+                <div class="form-group">
+                    <label for="emaile">Email</label>
+                    <validation-provider v-slot="{ errors , classes }" name="Email" rules="required|email">
+                        <input type="email" class="form-control" :class="classes" id="email" placeholder="請輸入電子郵件,必填"
+                            v-model="user.email">
+                        <span class="text-danger">{{ errors[0] }}</span>
+                    </validation-provider>
+                </div>
+                <div class="form-group">
+                    <label for="tel">電話</label>
+                    <validation-provider v-slot="{ errors , classes }" name="手機號碼" rules="required|phone">
+                        <input type="tel" class="form-control" :class="classes" id="tel" placeholder="請輸入電話"
+                            v-model.number="user.phone">
+                        <span class="text-danger">{{ errors[0] }}</span>
+                    </validation-provider>
+                </div>
+                <div class="form-group">
+                    <label for="address">地址</label>
+                    <validation-provider v-slot="{ errors , classes }" name="地址" rules="required|addres:6">
+                        <input type="text" class="form-control" :class="classes" id="address" placeholder="請輸入姓名"
+                            v-model="user.addrss">
+                        <span class="text-danger">{{ errors[0] }}</span>
+                    </validation-provider>
+                </div>
+                <div class="form-group">
+                    <label for="">購買方式</label>
+                    <select class="form-control" v-model="user.pay" required>
+                        <option value="" disabled>請選擇付款方式</option>
+                        <option value="WebATM">WebATM</option>
+                        <option value="ATM">ATM</option>
+                        <option value="Barcode">Barcode</option>
+                        <option value="Credit">Credit</option>
+                        <option value="ApplePay">ApplePay</option>
+                        <option value="GooglePay">GooglePay</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="textcontent"></label>
+                    <textarea class="form-control customOrder-textcontent" name="textcontent" id="textcontent" cols="30"
+                        rows="10" v-model="user.conttent"></textarea>
+                    <button type="submit" class="btn btn-danger" :disabled="invalid">
+                        送出
+                    </button>
+                </div>
+            </form>
+        </validation-observer>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/3.3.0/vee-validate.full.min.js"></script>
+<script type="module" src="./js/customOrder.js"></script>
+
+</html>
